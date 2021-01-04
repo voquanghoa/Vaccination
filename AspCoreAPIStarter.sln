@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspCoreAPIStarter", "AspCoreAPIStarter\AspCoreAPIStarter.csproj", "{1C6E0C2C-FCF1-4CDA-90E4-A169771081E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspDataModel", "AspDataModel\AspDataModel.csproj", "{EC604B73-7273-492F-82CE-90858FE4BB0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspBusiness", "AspBusiness\AspBusiness.csproj", "{EB80D656-B005-4371-BD53-BE390C0A23E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C6E0C2C-FCF1-4CDA-90E4-A169771081E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C6E0C2C-FCF1-4CDA-90E4-A169771081E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C6E0C2C-FCF1-4CDA-90E4-A169771081E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C6E0C2C-FCF1-4CDA-90E4-A169771081E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC604B73-7273-492F-82CE-90858FE4BB0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC604B73-7273-492F-82CE-90858FE4BB0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC604B73-7273-492F-82CE-90858FE4BB0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC604B73-7273-492F-82CE-90858FE4BB0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB80D656-B005-4371-BD53-BE390C0A23E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB80D656-B005-4371-BD53-BE390C0A23E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB80D656-B005-4371-BD53-BE390C0A23E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB80D656-B005-4371-BD53-BE390C0A23E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
