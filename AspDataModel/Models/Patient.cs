@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AspDataModel.Models
 {
+    [Table("Patients")]
     public class Patient: IdBase
     {
         public string FullName { get; set; }
