@@ -1,17 +1,25 @@
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using AspBusiness.Contracts;
+using AspBusiness.AutoConfig;
 using AspBusiness.Exceptions;
+using AspBusiness.Models;
 using AspBusiness.Providers;
 using AspDataModel;
-using AspDataModel.Contracts;
 using AspDataModel.Models;
 using AspDataModel.Utils;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspBusiness.Businesses
 {
+    [ImplementBy(typeof(AuthBusiness))]
+    public interface IAuthBusiness
+    {
+        Task<User> Login(string username);
+        Task<User> Login(UserLogin userLogin);
+    }
+
     public class AuthBusiness: GenericBusiness<User>, IAuthBusiness
     {
         public AuthBusiness(DataContext context) : base(context)
@@ -21,11 +29,11 @@ namespace AspBusiness.Businesses
         private async Task<User> Login(Expression<Func<User, bool>> predicate)
         {
             var account = await Entries.FirstOrDefaultAsync(predicate)
-                          ?? throw new BadRequestException("Sai tên đăng nhập");
+                          ?? throw new BadRequestException("Wrong username or password");
 
             if (!account.Valid)
             {
-                throw new ForbiddenException("Người dùng không hợp lệ.");
+                throw new ForbiddenException("You account is invalid.");
             }
 
             return account;

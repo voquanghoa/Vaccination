@@ -19,6 +19,12 @@ namespace AspCoreAPIStarter.Controllers.Visitors
             this.registeredPatientBussiness = registeredPatientBussiness;
         }
 
+        /// <summary>
+        /// Xem thông tin theo mã QR
+        /// </summary>
+        /// <param name="qr"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
         [HttpGet]
         public async Task<ProfileInfo> GetProfile(Guid qr)
         {
@@ -33,6 +39,7 @@ namespace AspCoreAPIStarter.Controllers.Visitors
             profile = await registeredPatientBussiness.Get(qr);
             if (profile != null)
             {
+                profile.Valid = false;
                 return profile;
             }
 

@@ -29,5 +29,13 @@ namespace AspDataModel.Models
         public DateTime CreatedDate { get; set; }
 
         public DateTime? ApprovalDate { get; set; }
+
+        public DateTime? RemindFirstVaccinateDateTime { get; set; }
+        public DateTime? FirstVaccinateDateTime { get; set; }
+        public string FirstVaccinateDescription { get; set; }
+
+        public DateTime? RemindSecondVaccinateDateTime { get; set; }
+        public DateTime? SecondVaccinateDateTime { get; set; }
+        public string SecondVaccinateDescription { get; set; }
     }
 }

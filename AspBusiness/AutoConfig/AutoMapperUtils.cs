@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using AspDataModel.Models;
 using AutoMapper;
 
 namespace AspBusiness.AutoConfig
@@ -29,6 +30,7 @@ namespace AspBusiness.AutoConfig
         private static void Config(IMapperConfigurationExpression mapperConfigurationExpression)
         {
             ScanAssembly(mapperConfigurationExpression);
+            mapperConfigurationExpression.CreateMap<RegisteredPatient, Patient>();
         }
 
         private static readonly MapperConfiguration mapperConfiguration = new MapperConfiguration(Config);

@@ -33,5 +33,37 @@ namespace AspBusiness.Models.Patients
         public DateTime? ApprovalDate { get; set; }
 
         public bool Valid { get; set; }
+
+        public DateTime? RemindFirstVaccinateDateTime { get; set; }
+        public DateTime? FirstVaccinateDateTime { get; set; }
+        public string FirstVaccinateDescription { get; set; }
+
+        public DateTime? RemindSecondVaccinateDateTime { get; set; }
+        public DateTime? SecondVaccinateDateTime { get; set; }
+        public string SecondVaccinateDescription { get; set; }
+
+        public ProfileStatus Status
+        {
+            get
+            {
+                if (Valid == false)
+                {
+                    return ProfileStatus.Registered;
+                }
+
+                if (FirstVaccinateDateTime == null)
+                {
+                    return ProfileStatus.Approval;
+                }
+
+                if (SecondVaccinateDateTime == null)
+                {
+                    return ProfileStatus.FinishFirstTime;
+                }
+
+                return ProfileStatus.Done;
+            }
+
+        }
     }
 }
