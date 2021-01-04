@@ -20,7 +20,7 @@ namespace AspDataModel.Models
 
         public string ProfileUrl { get; set; }
 
-        public bool Sex { get; set; }
+        public Gender Sex { get; set; }
 
         public DateTime? Birthday { get; set; }
 

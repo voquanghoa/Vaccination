@@ -1,7 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using AspBusiness.AutoConfig;
 using AspBusiness.Exceptions;
 using AspBusiness.Models;
+using AspBusiness.Models.Patients;
 using AspDataModel;
 using AspDataModel.Models;
 using AspDataModel.Utils;
@@ -13,6 +15,8 @@ namespace AspBusiness.Businesses.Patients
     public interface IPatientBussiness
     {
         Task<Patient> Login(LoginForm loginForm);
+
+        Task<ProfileInfo> Get(Guid qr);
     }
 
     public class PatientBussiness: GenericBusiness<Patient>, IPatientBussiness
@@ -30,6 +34,11 @@ namespace AspBusiness.Businesses.Patients
 
                           ?? throw new BadRequestException("Tên đăng nhập hoặc mật khẩu không đúng hoặc tài khoản chưa được chứng thực");
 
+        }
+
+        public async Task<ProfileInfo> Get(Guid qr)
+        {
+            return (await Entries.FirstOrDefaultAsync(x => x.QRCode == qr))?.ConvertTo<ProfileInfo>();
         }
     }
 }

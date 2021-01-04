@@ -1,10 +1,12 @@
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
+using AspBusiness.AutoConfig;
+using AspDataModel.Models;
 
-namespace AspDataModel.Models
+namespace AspBusiness.Models.Patients
 {
-    [Table("Patients")]
-    public class Patient: IdBase
+    [ConvertFrom(typeof(Patient))]
+    [ConvertFrom(typeof(RegisteredPatient))]
+    public class ProfileInfo: IdBase
     {
         public string FullName { get; set; }
 
@@ -29,5 +31,7 @@ namespace AspDataModel.Models
         public DateTime CreatedDate { get; set; }
 
         public DateTime? ApprovalDate { get; set; }
+
+        public bool Valid { get; set; }
     }
 }
