@@ -17,11 +17,29 @@ namespace AspDataModel
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasData(new User()
             {
-                Id = 1,
-                Username = "Admin",
-                FullName = "Admin",
+                Id = 2,
+                Username = "admin",
+                FullName = "Huu Truong",
                 Role = Role.Admin,
-                Password = "admin123".Encode(),
+                Password = "huu123".Encode(),
+                Valid = true
+            });
+            modelBuilder.Entity<User>().HasData(new User()
+            {
+                Id = 3,
+                Username = "nurse",
+                FullName = "Hoc Le",
+                Role = Role.Nurse,
+                Password = "hoc123".Encode(),
+                Valid = true
+            });
+            modelBuilder.Entity<User>().HasData(new User()
+            {
+                Id = 4,
+                Username = "assistant",
+                FullName = "Man Nguyen",
+                Role = Role.Assistant,
+                Password = "man123".Encode(),
                 Valid = true
             });
         }
