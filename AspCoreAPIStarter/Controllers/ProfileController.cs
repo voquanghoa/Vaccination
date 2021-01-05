@@ -5,9 +5,9 @@ using AspBusiness.Exceptions;
 using AspBusiness.Models.Patients;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AspCoreAPIStarter.Controllers.Visitors
+namespace AspCoreAPIStarter.Controllers
 {
-    [Route("api/vistors/profile")]
+    [Route("api/profile")]
     public class ProfileController: ControllerBase
     {
         private readonly ICommonPatientBussiness commonPatientBussiness;
@@ -18,15 +18,15 @@ namespace AspCoreAPIStarter.Controllers.Visitors
         }
 
         /// <summary>
-        /// Xem thông tin theo mã QR
+        /// Xem thông tin bệnh nhân theo mã QR dành cho Assistant, Nurse, Admin
         /// </summary>
         /// <param name="qr"></param>
         /// <returns></returns>
         /// <exception cref="NotFoundException"></exception>
         [HttpGet]
-        public async Task<VisitorProfileInfo> GetProfile(Guid qr)
+        public async Task<ProfileInfo> GetProfile(Guid qr)
         {
-            return await commonPatientBussiness.Get<VisitorProfileInfo>(qr);
+            return await commonPatientBussiness.Get<ProfileInfo>(qr);
         }
     }
 }

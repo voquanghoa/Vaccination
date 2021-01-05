@@ -13,7 +13,7 @@ namespace AspBusiness.Businesses.Patients
     {
         Task<RegisteredPatient> Create(ProfileCreate profileCreate);
 
-        Task<ProfileInfo> Get(Guid qr);
+        Task<RegisteredPatient> Get(Guid qr);
     }
 
     public class RegisteredPatientBussiness: GenericBusiness<RegisteredPatient>, IRegisteredPatientBussiness
@@ -21,16 +21,18 @@ namespace AspBusiness.Businesses.Patients
         public async Task<RegisteredPatient> Create(ProfileCreate profileCreate)
         {
             var registeredPatient = profileCreate.ConvertTo<RegisteredPatient>();
-
+            registeredPatient.QRCode = Guid.NewGuid();
+            registeredPatient.CreatedDate = DateTime.Now;
+            
             AddEntry(registeredPatient);
             await SaveChangesAsync();
 
             return registeredPatient;
         }
 
-        public async Task<ProfileInfo> Get(Guid qr)
+        public async Task<RegisteredPatient> Get(Guid qr)
         {
-            return (await Entries.FirstOrDefaultAsync(x => x.QRCode == qr))?.ConvertTo<ProfileInfo>();
+            return await Entries.FirstOrDefaultAsync(x => x.QRCode == qr);
         }
 
         public RegisteredPatientBussiness(DataContext context) : base(context)

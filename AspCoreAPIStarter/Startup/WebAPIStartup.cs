@@ -25,6 +25,7 @@ namespace AspCoreAPIStarter.Startup
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(SwaggerConfig.ConfigSwagger);
             services.ConfigSecurity(Config<SecuritySettings>(services));
@@ -56,15 +57,21 @@ namespace AspCoreAPIStarter.Startup
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
+
             app.UseMiddleware<TokenProviderMiddleware>();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.ConfigSwagger();
 
             var options = new DefaultFilesOptions();
@@ -73,8 +80,6 @@ namespace AspCoreAPIStarter.Startup
             app.UseDefaultFiles(options);
 
             app.UseStaticFiles();
-
-
         }
 
         private void ConfigDb(DbContextOptionsBuilder options)

@@ -5,6 +5,7 @@ using AspDataModel.Models;
 namespace AspBusiness.Models.Patients
 {
     [ConvertTo(typeof(Patient))]
+    [ConvertTo(typeof(RegisteredPatient))]
     public class ProfileCreate
     {
         public string FullName { get; set; }
@@ -17,11 +18,9 @@ namespace AspBusiness.Models.Patients
 
         public string Password { get; set; }
 
-        public Guid QRCode { get; set; }
-
         public string ProfileUrl { get; set; }
 
-        public bool Sex { get; set; }
+        public Gender Sex { get; set; }
 
         public DateTime? Birthday { get; set; }
 

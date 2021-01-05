@@ -18,14 +18,16 @@ namespace AspCoreAPIStarter.Controllers.Patients
         private readonly ITokenGenerator tokenGenerator;
         private readonly IAuthenInfo authenInfo;
         private readonly IPatientBussiness patientBussiness;
+        private readonly ICommonPatientBussiness commonPatientBussiness;
 
 
-        public ProfileController(IRegisteredPatientBussiness registeredPatientBussiness, ITokenGenerator tokenGenerator, IPatientBussiness patientBussiness, IAuthenInfo authenInfo)
+        public ProfileController(IRegisteredPatientBussiness registeredPatientBussiness, ITokenGenerator tokenGenerator, IPatientBussiness patientBussiness, IAuthenInfo authenInfo, ICommonPatientBussiness commonPatientBussiness)
         {
             this.registeredPatientBussiness = registeredPatientBussiness;
             this.tokenGenerator = tokenGenerator;
             this.patientBussiness = patientBussiness;
             this.authenInfo = authenInfo;
+            this.commonPatientBussiness = commonPatientBussiness;
         }
 
         /// <summary>
@@ -34,40 +36,27 @@ namespace AspCoreAPIStarter.Controllers.Patients
         /// <param name="profileCreate"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<TokenResponse> Create([FromBody]ProfileCreate profileCreate)
+        public async Task<ProfileCreateResponse> Create([FromBody]ProfileCreate profileCreate)
         {
             var patient = await registeredPatientBussiness.Create(profileCreate);
-            return tokenGenerator.GenerateToken(patient.QRCode.FormatAsString(), Role.Patient);
+            var token = tokenGenerator.GenerateToken(patient.QRCode.FormatAsString(), Role.Patient).Token;
+            return new ProfileCreateResponse()
+            {
+                QRCode = patient.QRCode,
+                Token = token
+            };
         }
 
         /// <summary>
         /// Lấy thông tin của tôi
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NotFoundException"></exception>
         [Authorize(Roles = "Patient")]
         [HttpGet]
         public async Task<ProfileInfo> GetMe()
         {
             var qr = authenInfo.Get().Username.FromString();
-
-            var profile = await patientBussiness.Get(qr);
-
-            if (profile != null)
-            {
-                profile.Valid = true;
-                return profile;
-            }
-
-            profile = await registeredPatientBussiness.Get(qr);
-
-            if (profile != null)
-            {
-                profile.Valid = false;
-                return profile;
-            }
-
-            throw new NotFoundException("No patient found");
+            return await commonPatientBussiness.Get<ProfileInfo>(qr);
         }
     }
 }

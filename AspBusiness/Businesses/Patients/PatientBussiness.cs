@@ -16,7 +16,7 @@ namespace AspBusiness.Businesses.Patients
     {
         Task<Patient> Login(LoginForm loginForm);
 
-        Task<ProfileInfo> Get(Guid qr);
+        Task<Patient> Get(Guid qr);
 
         Task Approval(Guid qr);
     }
@@ -38,9 +38,9 @@ namespace AspBusiness.Businesses.Patients
 
         }
 
-        public async Task<ProfileInfo> Get(Guid qr)
+        public async Task<Patient> Get(Guid qr)
         {
-            return (await Entries.FirstOrDefaultAsync(x => x.QRCode == qr))?.ConvertTo<ProfileInfo>();
+            return (await Entries.FirstOrDefaultAsync(x => x.QRCode == qr));
         }
 
         public async Task Approval(Guid qr)
