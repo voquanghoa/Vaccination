@@ -14,7 +14,7 @@ namespace AspBusiness.Businesses.Patients
     [ImplementBy(typeof(PatientBussiness))]
     public interface IPatientBussiness
     {
-        Task<Patient> Login(LoginForm loginForm);
+        Task<Guid?> Login(LoginForm loginForm);
 
         Task<Patient> Get(Guid qr);
 
@@ -27,14 +27,11 @@ namespace AspBusiness.Businesses.Patients
         {
         }
 
-        public async Task<Patient> Login(LoginForm loginForm)
+        public async Task<Guid?> Login(LoginForm loginForm)
         {
-            return await Entries.FirstOrDefaultAsync(x =>
-                              (x.Phone == loginForm.Username
-                               || x.PersonalId == loginForm.Username
-                               || x.Email == loginForm.Username) && x.Password == loginForm.Password.Encode())
-
-                          ?? throw new BadRequestException("Bad user credentication or your account has not been approval");
+            return (await Entries.FirstOrDefaultAsync(x =>
+                       (x.Phone == loginForm.Username || x.PersonalId == loginForm.Username || x.Email == loginForm.Username)
+                       && x.Password == loginForm.Password.Encode()))?.QRCode;
 
         }
 

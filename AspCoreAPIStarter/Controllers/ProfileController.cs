@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AspBusiness.Businesses.Patients;
 using AspBusiness.Exceptions;
 using AspBusiness.Models.Patients;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspCoreAPIStarter.Controllers
@@ -24,6 +25,7 @@ namespace AspCoreAPIStarter.Controllers
         /// <returns></returns>
         /// <exception cref="NotFoundException"></exception>
         [HttpGet]
+        [Authorize(Roles = "Assistant,Nurse,Admin")]
         public async Task<ProfileInfo> GetProfile(Guid qr)
         {
             return await commonPatientBussiness.Get<ProfileInfo>(qr);

@@ -20,7 +20,7 @@ namespace AspBusiness.Models.Patients
 
         public DateTime? ApprovalDate { get; set; }
 
-        public bool Valid { get; set; }
+        public bool Valid => ApprovalDate != null;
 
         public DateTime? RemindFirstVaccinateDateTime { get; set; }
         public DateTime? FirstVaccinateDateTime { get; set; }

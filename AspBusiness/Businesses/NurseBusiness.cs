@@ -35,6 +35,7 @@ namespace AspBusiness.Businesses
                 throw new BadRequestException("This patient has already finish the first vaccinatation");
             }
             patient.FirstVaccinateDateTime = DateTime.Now;
+            UpdateEntry(patient);
             await SaveChangesAsync();
         }
 
@@ -52,7 +53,7 @@ namespace AspBusiness.Businesses
             }
 
             patient.SecondVaccinateDateTime = DateTime.Now;
-
+            UpdateEntry(patient);
             await SaveChangesAsync();
         }
     }

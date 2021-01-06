@@ -18,6 +18,11 @@ namespace AspBusiness.Businesses
             Context.Entry(entry).State = EntityState.Added;
         }
 
+        protected void UpdateEntry<T>(T entry)
+        {
+            Context.Entry(entry).State = EntityState.Modified;
+        }
+
         protected void DeleteEntry<T>(T entry)
         {
             Context.Entry(entry).State = EntityState.Deleted;

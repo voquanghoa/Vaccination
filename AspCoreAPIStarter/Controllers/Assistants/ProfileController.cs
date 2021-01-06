@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AspCoreAPIStarter.Controllers.Assistants
 {
     [Route("api/assistants/profile")]
-    [Authorize(Roles = "Assistant")]
+    [Authorize(Roles = "Assistant,Admin")]
     public class ProfileController
     {
         private readonly IPatientBussiness patientBussiness;

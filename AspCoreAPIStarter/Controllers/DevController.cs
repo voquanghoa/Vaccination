@@ -51,5 +51,16 @@ namespace AspCoreAPIStarter.Controllers
         {
             return "Mã QR là " + qr.FormatAsString();
         }
+
+        /// <summary>
+        /// Kiểm tra mã QR, ví dụ 644e1dd7-2a7f-18fb-b8ed-ed78c3f92c2b
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [HttpGet("password")]
+        public string CheckPassword(string password)
+        {
+            return "Encrypted = " + password.Encode();
+        }
     }
 }

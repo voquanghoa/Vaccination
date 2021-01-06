@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using AspBusiness.AutoConfig;
 using AspBusiness.Exceptions;
+using AspBusiness.Models;
 
 namespace AspBusiness.Businesses.Patients
 {
@@ -9,6 +10,8 @@ namespace AspBusiness.Businesses.Patients
     public interface ICommonPatientBussiness
     {
         Task<T> Get<T>(Guid qr);
+
+        Task<Guid> Login(LoginForm loginForm);
     }
 
     public class CommonPatientBussiness: ICommonPatientBussiness
@@ -39,6 +42,12 @@ namespace AspBusiness.Businesses.Patients
             }
 
             throw new NotFoundException("No patient found");
+        }
+
+        public async Task<Guid> Login(LoginForm loginForm)
+        {
+            return (await patientBussiness.Login(loginForm)) ?? (await registeredPatientBussiness.Login(loginForm))
+                ?? throw new BadRequestException("Bad credentical");
         }
     }
 }

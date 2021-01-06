@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using AspBusiness.Businesses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AspCoreAPIStarter.Controllers.Nurses
 {
     [Route("api/nurses/log")]
-    [Authorize(Roles = "Nurse")]
+    [Authorize(Roles = "Nurse,Admin")]
     public class LogController: ControllerBase
     {
         private readonly INurseBusiness nurseBusiness;
@@ -21,7 +22,7 @@ namespace AspCoreAPIStarter.Controllers.Nurses
         /// </summary>
         /// <param name="qr"></param>
         [HttpPost("first")]
-        public void LogFirst(Guid qr) => nurseBusiness.SetFirst(qr);
+        public async Task LogFirst(Guid qr) => await nurseBusiness.SetFirst(qr);
 
 
         /// <summary>
@@ -29,6 +30,6 @@ namespace AspCoreAPIStarter.Controllers.Nurses
         /// </summary>
         /// <param name="qr"></param>
         [HttpPost("second")]
-        public void LogSecond(Guid qr) => nurseBusiness.SetSecond(qr);
+        public async Task LogSecond(Guid qr) => await nurseBusiness.SetSecond(qr);
     }
 }
